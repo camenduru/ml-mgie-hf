@@ -1,0 +1,9 @@
+sentencepiece
+transformers
+diffusers
+tokenizers
+datasets
+accelerate
+evaluate
+gradio
+git+https://github.com/haotian-liu/LLaVA@7ace501
