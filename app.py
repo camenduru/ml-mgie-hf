@@ -139,4 +139,4 @@ with gr.Blocks() as app:
     btn_sub.click(fn=go_mgie, inputs=[inp, txt, seed, cfg_txt, cfg_img], outputs=[res, out])
     btn_exp.click(fn=go_example, inputs=[seed, cfg_txt, cfg_img], outputs=[inp, txt, seed, cfg_txt, cfg_img])
     
-app.queue(concurrency_count=1), app.launch()
+app.queue(concurrency_count=1), app.launch(share=True)
