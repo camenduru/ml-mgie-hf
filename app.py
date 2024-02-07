@@ -39,7 +39,8 @@ DEFAULT_IMAGE_TOKEN = '<image>'
 DEFAULT_IMAGE_PATCH_TOKEN = '<im_patch>'
 DEFAULT_IM_START_TOKEN = '<im_start>'
 DEFAULT_IM_END_TOKEN = '<im_end>'
-PATH_LLAVA = '/data/LLaVA-7B-v1'
+# PATH_LLAVA = '/data/LLaVA-7B-v1'
+PATH_LLAVA = 'liuhaotian/llava-v1.5-7b'
 
 tokenizer = transformers.AutoTokenizer.from_pretrained(PATH_LLAVA)
 model = LlavaLlamaForCausalLM.from_pretrained(PATH_LLAVA, low_cpu_mem_usage=True, torch_dtype=T.float16, use_cache=True).cuda()
