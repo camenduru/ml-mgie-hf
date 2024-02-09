@@ -1,7 +1,7 @@
 
 import os
 # os.system('cp -r ./_ckpt/LLaVA-7B-v1 /data/LLaVA-7B-v1'), os.system('cp -r ./_ckpt/mgie_7b /data/mgie_7b')
-os.system('ls /data'), os.system('df -h /data')
+# os.system('ls /data'), os.system('df -h /data')
 [os.system('mv llava.py /usr/local/lib/python3.10/dist-packages/llava/model/llava.py'), 
  os.system('mv train.py /usr/local/lib/python3.10/dist-packages/llava/train/train.py')]
 
@@ -39,8 +39,8 @@ DEFAULT_IMAGE_TOKEN = '<image>'
 DEFAULT_IMAGE_PATCH_TOKEN = '<im_patch>'
 DEFAULT_IM_START_TOKEN = '<im_start>'
 DEFAULT_IM_END_TOKEN = '<im_end>'
-# PATH_LLAVA = '/data/LLaVA-7B-v1'
-PATH_LLAVA = 'liuhaotian/llava-v1.5-7b'
+PATH_LLAVA = '/content/ml-mgie-hf/data/LLaVA-7B-v1'
+# PATH_LLAVA = 'liuhaotian/llava-v1.5-7b'
 
 tokenizer = transformers.AutoTokenizer.from_pretrained(PATH_LLAVA)
 model = LlavaLlamaForCausalLM.from_pretrained(PATH_LLAVA, low_cpu_mem_usage=True, torch_dtype=T.float16, use_cache=True).cuda()
@@ -49,7 +49,7 @@ image_processor = transformers.CLIPImageProcessor.from_pretrained(model.config.m
 tokenizer.padding_side = 'left'
 tokenizer.add_tokens(['[IMG0]', '[IMG1]', '[IMG2]', '[IMG3]', '[IMG4]', '[IMG5]', '[IMG6]', '[IMG7]'], special_tokens=True)
 model.resize_token_embeddings(len(tokenizer))
-ckpt = T.load('/data/mgie_7b/mllm.pt', map_location='cpu')
+ckpt = T.load('/content/ml-mgie-hf/data/mgie_7b/mllm.pt', map_location='cpu')
 model.load_state_dict(ckpt, strict=False)
 
 mm_use_im_start_end = getattr(model.config, 'mm_use_im_start_end', False)
@@ -71,7 +71,7 @@ with T.inference_mode(): NULL = model.edit_head(T.zeros(1, 8, 4096).half().to('c
 
 pipe = diffusers.StableDiffusionInstructPix2PixPipeline.from_pretrained('timbrooks/instruct-pix2pix', torch_dtype=T.float16).to('cuda')
 pipe.set_progress_bar_config(disable=True)
-pipe.unet.load_state_dict(T.load('/data/mgie_7b/unet.pt', map_location='cpu'))
+pipe.unet.load_state_dict(T.load('/content/ml-mgie-hf/data/mgie_7b/unet.pt', map_location='cpu'))
 print('--init MGIE--')
 
 def go_mgie(img, txt, seed, cfg_txt, cfg_img):
