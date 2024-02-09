@@ -2,8 +2,8 @@
 import os
 # os.system('cp -r ./_ckpt/LLaVA-7B-v1 /data/LLaVA-7B-v1'), os.system('cp -r ./_ckpt/mgie_7b /data/mgie_7b')
 # os.system('ls /data'), os.system('df -h /data')
-[os.system('mv llava.py /usr/local/lib/python3.10/dist-packages/llava/model/llava.py'), 
- os.system('mv train.py /usr/local/lib/python3.10/dist-packages/llava/train/train.py')]
+[os.system('cp llava.py /usr/local/lib/python3.10/dist-packages/llava/model/llava.py'), 
+ os.system('cp train.py /usr/local/lib/python3.10/dist-packages/llava/train/train.py')]
 
 from PIL import Image
 

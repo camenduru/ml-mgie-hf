@@ -5,5 +5,5 @@ tokenizers
 datasets
 accelerate
 evaluate
-gradio
+gradio==3.50.2
 git+https://github.com/haotian-liu/LLaVA@7ace501
